@@ -140,7 +140,7 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                         <div >
                             <Card className="border-blue-900 shadow-custom shadow bg-card-bg">
                                 <CardHeader>
-                                    <CardTitle>{"Past " + titletime + " Grantee Summary"}</CardTitle>
+                                    <CardTitle>{"Past " + timeframe + " Grantee Summary"}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <DataTable data={data.leaderboard} columns={columns} link_names={true} />
