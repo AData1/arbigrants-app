@@ -64,7 +64,7 @@ export const columns: ColumnDef<App>[] = [
             <DataTableColumnHeader column={column} title="Gas Fees Δ" />
         ),
         cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("ETH_FEES"));
+            const amount = parseFloat(row.getValue("ETH_FEES_GROWTH"));
             // const displayValue = amount === 0 ? '-' : amount.toFixed(2);
             return (
                 <div className="max-w-[500px] truncate font-medium">

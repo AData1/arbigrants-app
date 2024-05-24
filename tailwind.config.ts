@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       boxShadow: {
-        'custom': '3px 3px 0px 0px rgb(12,53,133)',
+        'custom': '3px 3px 0px 0px rgba(73, 73, 73, 71)',
       },
       fontFamily: {
         berkeleymono: ['BerkeleyMono', 'sans-serif'],
