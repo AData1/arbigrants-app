@@ -1,0 +1,35 @@
+import { unstable_noStore as noStore } from "next/cache";
+
+interface GranteeInfo {
+    NAME: string;
+    DESCRIPTION: string;
+    DUNE: string;
+    LOGO: string;
+    TWITTER: string;
+    WEBSITE: string;
+}
+
+interface GranteeData {
+    info: GranteeInfo[];
+    wallets_chart: any[];
+    gas_chart: any[];
+    txns_chart: any[];
+}
+
+interface GranteeDataParams {
+    timeframe: string;
+    grantee_name: string;
+}
+
+
+export async function getGranteeData({ timeframe, grantee_name }: GranteeDataParams): Promise<GranteeData> {
+    noStore();
+    const response = await fetch(`https://arbigrants-api.onrender.com/grantee?timeframe=${timeframe}&grantee_name=${grantee_name}`);
+    if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+    }
+
+    const granteeData: GranteeData = await response.json();
+
+    return granteeData;
+}

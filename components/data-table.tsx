@@ -107,7 +107,7 @@ export function DataTable<TData, TValue>({
                                         return (
                                             <TableCell key={cell.id}>
                                                 {index === 1 && link_names ? (
-                                                    <Link href={`/grantee/${cell.getValue()}`}>
+                                                    <Link href={`/grantee/week/${cell.getValue()}`}>
                                                         <p className="font-bold text-blue-600">
                                                             {cell.getValue() as string}
                                                             {/* <ExternalLink className="inline-block align-middle mr-2 h-4 w-4" /> */}

@@ -74,16 +74,16 @@ export function MultiLineChart({ data, xaxis, yaxis, segment, usd }: SBChartProp
     return (
         <ResponsiveContainer width="100%" height={350}>
             <LineChart data={transformedData}>
-                <CartesianGrid vertical={false} horizontal={true} strokeDasharray="3 3" />
+                <CartesianGrid vertical={false} horizontal={true} strokeDasharray="3 3" stroke="black" />
                 <XAxis
                     dataKey={xaxis}
-                    stroke="#888888"
+                    stroke="#000000"
                     fontSize={12}
                     tickLine={false}
                     axisLine={false}
                 />
                 <YAxis
-                    stroke="#888888"
+                    stroke="#000000"
                     fontSize={12}
                     tickLine={false}
                     axisLine={false}
@@ -93,6 +93,7 @@ export function MultiLineChart({ data, xaxis, yaxis, segment, usd }: SBChartProp
                 <Tooltip />
                 <Legend />
                 <Line type="monotone" dataKey="grantees" stroke="#d1345b" />
+                {/* "#d1345b" */}
                 <Line type="monotone" dataKey="total" stroke="#1044AD" />
             </LineChart>
         </ResponsiveContainer>

@@ -133,7 +133,21 @@ export const columns: ColumnDef<App>[] = [
             )
         },
     },
-
+    {
+        accessorKey: "TVL",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="TVL" />
+        ),
+        cell: ({ row }) => {
+            const amount = parseFloat(row.getValue("TVL"));
+            const displayValue = amount === 0 ? '-' : Math.round(amount).toLocaleString();
+            return (
+                <div className="max-w-[500px] truncate font-medium">
+                    ${displayValue}
+                </div>
+            )
+        },
+    },
     {
         accessorKey: "CATEGORY",
         header: ({ column }) => (

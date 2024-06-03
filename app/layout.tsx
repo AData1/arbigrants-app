@@ -55,7 +55,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body>
+        <body style={{ backgroundColor: '#DCECF9' }}>
           <div className="relative flex min-h-screen flex-col px-4 2xl:padding-xl">
             <SiteHeader />
             <Separator />
