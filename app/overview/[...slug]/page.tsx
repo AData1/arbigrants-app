@@ -79,6 +79,7 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                         <RedirectToSignIn />
                     </SignedOut>
                     <SignedIn>
+                        <TimeSelect />
                         <div className="grid gap-4 grid-cols-2 md:grid-cols-3">
                             {/* First and Fourth cards (24h stats)*/}
                             <StatCard
@@ -117,8 +118,8 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                             />
                         </div>
                         {/* <p className="text-sm font-bold text-muted-foreground">*ACTIVE WALLET = MADE A TRANSACTION</p> */}
-                        <Separator />
-                        <TimeSelect />
+                        {/* <Separator /> */}
+
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>

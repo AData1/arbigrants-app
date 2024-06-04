@@ -114,14 +114,16 @@ export default async function GranteePage({ params }: { params: { slug: string }
                                     <LChart data={data.txns_chart} yaxis={"TRANSACTIONS"} usd={false} fill="#000000" />
                                 </CardContent>
                             </Card>
-                            {/* <Card className="border-black shadow-custom shadow bg-card-bg">
-                                <CardHeader>
-                                    <CardTitle>{titleparam + " Active Accounts"}</CardTitle>
-                                </CardHeader>
-                                <CardContent className="pl-0">
-                                    <LChart data={data.wallets_chart} yaxis={"ACTIVE_WALLETS"} usd={false} fill="#000000" />
-                                </CardContent>
-                            </Card> */}
+                            {data.llama_bool[0].LLAMA_COUNT !== 0 && (
+                                <Card className="border-black shadow-custom shadow bg-card-bg">
+                                    <CardHeader>
+                                        <CardTitle>{"TVL"}</CardTitle>
+                                    </CardHeader>
+                                    <CardContent className="pl-0">
+                                        <LChart data={data.tvl_chart} yaxis={"TVL"} usd={false} fill="#000000" />
+                                    </CardContent>
+                                </Card>
+                            )}
                         </div>
                     </SignedIn>
                 </div>

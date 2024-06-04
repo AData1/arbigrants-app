@@ -9,11 +9,17 @@ interface GranteeInfo {
     WEBSITE: string;
 }
 
+interface LlamaBool {
+    LLAMA_COUNT: number;
+}
+
 interface GranteeData {
     info: GranteeInfo[];
     wallets_chart: any[];
     gas_chart: any[];
     txns_chart: any[];
+    tvl_chart: any[];
+    llama_bool: LlamaBool[];
 }
 
 interface GranteeDataParams {

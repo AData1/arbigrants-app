@@ -18,14 +18,14 @@ interface LineChartProps {
 }
 
 const formatDate = (date: string) => {
-    return moment(date, 'YY-MM-DD').format('DD-MMM-YY');
+    return moment(date, 'YYYY-MM-DD').format('DD-MMM-YYYY');
 };
 
 const CustomTooltip: React.FC<TooltipProps<any, any>> = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
             <div className="custom-tooltip" style={{ backgroundColor: '#fff', padding: '5px', border: '1px solid #ccc' }}>
-                <p className="label">{`${moment(label, 'YY-MM-DD').format('DD-MMM-YY')}`}</p>
+                <p className="label">{`${moment(label, 'YY-MM-DD').format('DD-MMM-YYYY')}`}</p>
                 <p style={{ color: '#8884d8' }}>{`VALUE: ${payload[0].value}`}</p>
             </div>
         );
@@ -52,15 +52,22 @@ const LChart: React.FC<LineChartProps> = ({ data, yaxis, usd, fill }) => {
     return (
         <ResponsiveContainer width="100%" height={300}>
             <LineChart data={transformedData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="DATE" tick={{ style: axisLabelStyle }} tickFormatter={formatDate} />
+                <CartesianGrid vertical={false} horizontal={true} strokeDasharray="3 3" stroke="black" />
+                <XAxis dataKey="DATE"
+                    tick={{ style: axisLabelStyle }}
+                    tickFormatter={formatDate}
+                    stroke="#000000"
+                    tickLine={false}
+                    axisLine={false} />
                 <YAxis
                     domain={[0, 'dataMax']}
                     tick={{ style: axisLabelStyle }}
                     tickFormatter={(value) =>
                         usd ? `$${formatYAxisTick(value)}` : formatYAxisTick(value)
                     }
-
+                    stroke="#000000"
+                    tickLine={false}
+                    axisLine={false}
                 />
                 <Tooltip />
                 <Line type="monotone" dataKey={yaxis} stroke={fill} />
