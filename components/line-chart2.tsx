@@ -25,7 +25,7 @@ type TransformedEntry = {
     [key: string]: string | number;
 };
 
-export function MultiLineChart({ data, xaxis, yaxis, segment, usd }: SBChartProps) {
+export function MLChart({ data, xaxis, yaxis, segment, usd }: SBChartProps) {
 
     const transformData = (data: DataEntry[]) => {
         const transformed: { [date: string]: TransformedEntry } = {};
@@ -88,12 +88,12 @@ export function MultiLineChart({ data, xaxis, yaxis, segment, usd }: SBChartProp
                     tickLine={false}
                     axisLine={false}
                     tickFormatter={formatYAxisTick}
-                    domain={[0, maxValue * 1.06]}
+                // domain={[0, maxValue * 1.06]}
                 />
                 <Tooltip />
                 <Legend />
                 <Line type="monotone" dataKey="grantees" stroke="#d1345b" name="Grantees" />
-                <Line type="monotone" dataKey="total" stroke="#1044AD" name="Arbitrum One Total" />
+                {/* <Line type="monotone" dataKey="total" stroke="#1044AD" name="Arbitrum One Total" /> */}
             </LineChart>
         </ResponsiveContainer>
     );

@@ -15,6 +15,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
+import { MLChart } from "@/components/line-chart2";
 import { StatCard } from "@/components/stat-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TimeSelect } from "@/components/time-select";
@@ -135,6 +136,24 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                                 </CardHeader>
                                 <CardContent className="pl-0">
                                     <MultiLineChart data={data.accounts_chart} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
+                                </CardContent>
+                            </Card>
+                        </div>
+                        <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+                            <Card className="border-black shadow-custom shadow bg-card-bg">
+                                <CardHeader>
+                                    <CardTitle>{titleparam + " Gas Spend (ETH) - Grantees Only"}</CardTitle>
+                                </CardHeader>
+                                <CardContent className="pl-0">
+                                    <MLChart data={data.gas_spend_chart} xaxis={"DATE"} yaxis={"GAS_SPEND"} segment={"CATEGORY"} usd={false} />
+                                </CardContent>
+                            </Card>
+                            <Card className="border-black shadow-custom shadow bg-card-bg">
+                                <CardHeader>
+                                    <CardTitle>{titleparam + " Active Accounts - Grantees Only"}</CardTitle>
+                                </CardHeader>
+                                <CardContent className="pl-0">
+                                    <MLChart data={data.accounts_chart} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
                                 </CardContent>
                             </Card>
                         </div>

@@ -30,13 +30,13 @@ export function DataTableToolbar<TData>({
                     }
                     className="border-black h-8 w-[150px] lg:w-[250px]"
                 />
-                {table.getColumn("CATEGORY") && (
+                {/* {table.getColumn("CATEGORY") && (
                     <DataTableFacetedFilter
                         column={table.getColumn("CATEGORY")}
                         title="Category"
                         options={categories}
                     />
-                )}
+                )} */}
                 {isFiltered && (
                     <Button
                         variant="ghost"
