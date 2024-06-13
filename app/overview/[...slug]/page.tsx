@@ -82,35 +82,33 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                     <SignedIn>
                         <TimeSelect />
                         <div className="grid gap-4 grid-cols-2 md:grid-cols-3">
-                            {/* First and Fourth cards (24h stats)*/}
+
+                            <StatCard
+                                title={"GRANTEE'S TVL"}
+                                className="border-black bg-card-bg shadow md:order-1"
+                                content={`$${data.tvl_stat[0].TVL_GRANTEES.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
+                            />
+                            <StatCard
+                                title={"PAST " + titletime + " GRANTEE'S % OF ARBITRUM TVL"}
+                                className="border-black bg-card-bg shadow md:order-4"
+                                content={data.tvl_pct_stat[0].PCT_TVL < 0.0001 ? '<0.01%' : `${(data.tvl_pct_stat[0].PCT_TVL * 100).toFixed(2)}%`}
+                            />
+
                             <StatCard
                                 title={"PAST " + titletime + " GRANTEE'S ACTIVE WALLETS"}
-                                className="border-black bg-card-bg shadow md:order-1"
+                                className="border-black bg-card-bg shadow md:order-2"
                                 content={data.wallets_stat[0].ACTIVE_WALLETS.toLocaleString()}
                             />
                             <StatCard
                                 title={"PAST " + titletime + " GRANTEE'S % OF ARBITRUM WALLETS"}
-                                className="border-black bg-card-bg shadow md:order-4"
+                                className="border-black bg-card-bg shadow md:order-5"
                                 content={data.wallets_pct_stat[0].PCT_WALLETS < 0.0001 ? '<0.01%' : `${(data.wallets_pct_stat[0].PCT_WALLETS * 100).toFixed(2)}%`}
                             />
 
-                            {/* Second and Fifth cards (7d stats) - order adjusted for md screens */}
-                            <StatCard
-                                title={"PAST " + titletime + " GRANTEE'S TRANSACTIONS"}
-                                className="border-black bg-card-bg shadow md:order-2"
-                                content={data.txns_stat[0].TRANSACTIONS.toLocaleString()}
-                            />
-                            <StatCard
-                                title={"PAST " + titletime + " GRANTEE'S % OF ARBITRUM TXNS"}
-                                className="border-black bg-card-bg shadow md:order-5"
-                                content={data.txns_pct_stat[0].PCT_TRANSACTIONS < 0.0001 ? '<0.01%' : `${(data.txns_pct_stat[0].PCT_TRANSACTIONS * 100).toFixed(2)}%`}
-                            />
-
-                            {/* Third and Sixth cards (1m stats) - order adjusted for md screens */}
                             <StatCard
                                 title={"PAST " + titletime + " GRANTEE'S GAS SPEND"}
                                 className="border-black bg-card-bg shadow md:order-3"
-                                content={`${data.gas_stat[0].GAS_SPEND.toLocaleString()} ETH`}
+                                content={`${Number(data.gas_stat[0].GAS_SPEND).toFixed(3)} ETH`}
                             />
                             <StatCard
                                 title={"PAST " + titletime + " GRANTEE'S % OF ARBITRUM GAS SPEND"}
