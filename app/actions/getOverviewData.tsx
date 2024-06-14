@@ -12,7 +12,7 @@ interface OverviewData {
     tvl_pct_stat: { PCT_TVL: number }[],
     gas_stat: { GAS_SPEND: number }[],
     gas_pct_stat: { PCT_GAS_SPEND: number }[],
-    gas_spend_chart: any[],
+    tvl_chart: any[],
     accounts_chart: any[],
     leaderboard: any[],
 }

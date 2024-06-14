@@ -122,10 +122,10 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
-                                    <CardTitle>{titleparam + " Gas Spend (ETH)"}</CardTitle>
+                                    <CardTitle>{titleparam + " TVL"}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="pl-0">
-                                    <MultiLineChart data={data.gas_spend_chart} xaxis={"DATE"} yaxis={"GAS_SPEND"} segment={"CATEGORY"} usd={false} />
+                                    <MultiLineChart data={data.tvl_chart} xaxis={"DATE"} yaxis={"TVL"} segment={"CATEGORY"} usd={true} />
                                 </CardContent>
                             </Card>
                             <Card className="border-black shadow-custom shadow bg-card-bg">
@@ -140,10 +140,10 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
-                                    <CardTitle>{titleparam + " Gas Spend (ETH) - Grantees Only"}</CardTitle>
+                                    <CardTitle>{titleparam + " TVL - Grantees Only"}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="pl-0">
-                                    <MLChart data={data.gas_spend_chart} xaxis={"DATE"} yaxis={"GAS_SPEND"} segment={"CATEGORY"} usd={false} />
+                                    <MLChart data={data.tvl_chart} xaxis={"DATE"} yaxis={"TVL"} segment={"CATEGORY"} usd={true} />
                                 </CardContent>
                             </Card>
                             <Card className="border-black shadow-custom shadow bg-card-bg">
