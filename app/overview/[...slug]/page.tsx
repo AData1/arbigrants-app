@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import { MLChart } from "@/components/line-chart2";
+import PieChartC from "@/components/pie-chart";
 import { StatCard } from "@/components/stat-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TimeSelect } from "@/components/time-select";
@@ -27,6 +28,7 @@ import { getOverviewData } from "@/app/actions/getOverviewData";
 import MSABarChart from "@/components/marketshare-chart-actions";
 import { MultiLineChart } from "@/components/multi-line-chart";
 import { ChevronUp, ChevronsUp, ChevronDown, ChevronsDown } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton, RedirectToSignIn, SignIn } from '@clerk/nextjs'
 
 export const metadata: Metadata = {
@@ -55,22 +57,6 @@ export default async function OverviewPage({ params }: { params: { slug: string 
     let titletime = timeframe.toUpperCase();
 
     const data = await getOverviewData({ timeframe });
-
-    // interface GrowthIconProps {
-    //     growthValue: number;
-    // }
-
-    // function GrowthIcon({ growthValue }: GrowthIconProps) {
-    //     if (growthValue > 50) {
-    //         return <ChevronsUp className="pl-1" />;
-    //     } else if (growthValue > 0) {
-    //         return <ChevronUp className="pl-1" />;
-    //     } else if (growthValue < 0) {
-    //         return <ChevronDown className="pl-1" />;
-    //     } else {
-    //         return <ChevronsDown className="pl-1" />;
-    //     }
-    // }
 
     return (
         <>
@@ -122,36 +108,59 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
-                                    <CardTitle>{titleparam + " TVL"}</CardTitle>
+                                    <CardTitle>{"TVL"}</CardTitle>
                                 </CardHeader>
-                                <CardContent className="pl-0">
-                                    <MultiLineChart data={data.tvl_chart} xaxis={"DATE"} yaxis={"TVL"} segment={"CATEGORY"} usd={true} />
+                                <CardContent >
+                                    <Tabs defaultValue="both">
+                                        <TabsList className="bg-[#DCECF9]">
+                                            <TabsTrigger value="both" className="[&[data-state='active']]:bg-[#9DCCED]">Comparison</TabsTrigger>
+                                            <TabsTrigger value="grantee" className="[&[data-state='active']]:bg-[#9DCCED]">Grantees Only</TabsTrigger>
+                                        </TabsList>
+                                        <TabsContent value="both" className="pt-3">
+                                            <MultiLineChart data={data.tvl_chart} xaxis={"DATE"} yaxis={"TVL"} segment={"CATEGORY"} usd={true} />
+                                        </TabsContent>
+                                        <TabsContent value="grantee" className="pt-3">
+                                            <MLChart data={data.tvl_chart} xaxis={"DATE"} yaxis={"TVL"} segment={"CATEGORY"} usd={true} />
+                                        </TabsContent>
+                                    </Tabs>
                                 </CardContent>
                             </Card>
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
                                     <CardTitle>{titleparam + " Active Accounts"}</CardTitle>
                                 </CardHeader>
-                                <CardContent className="pl-0">
-                                    <MultiLineChart data={data.accounts_chart} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
+                                <CardContent >
+                                    <Tabs defaultValue="both">
+                                        <TabsList className="bg-[#DCECF9]">
+                                            <TabsTrigger value="both" className="[&[data-state='active']]:bg-[#9DCCED]">Comparison</TabsTrigger>
+                                            <TabsTrigger value="grantee" className="[&[data-state='active']]:bg-[#9DCCED]">Grantees Only</TabsTrigger>
+                                        </TabsList>
+                                        <TabsContent value="both" className="pt-3">
+                                            <MultiLineChart data={data.accounts_chart} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
+                                        </TabsContent>
+                                        <TabsContent value="grantee" className="pt-3">
+                                            <MLChart data={data.accounts_chart} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
+                                        </TabsContent>
+                                    </Tabs>
+
                                 </CardContent>
                             </Card>
                         </div>
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
-                                    <CardTitle>{titleparam + " TVL - Grantees Only"}</CardTitle>
+                                    <CardTitle>{"TVL by Project"}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="pl-0">
-                                    <MLChart data={data.tvl_chart} xaxis={"DATE"} yaxis={"TVL"} segment={"CATEGORY"} usd={true} />
+                                    <PieChartC data={data.tvl_pie} yaxis={"PCT_TVL"} />
                                 </CardContent>
                             </Card>
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
-                                    <CardTitle>{titleparam + " Active Accounts - Grantees Only"}</CardTitle>
+                                    <CardTitle>{"Past " + timeframe + " Active Accounts by Project"}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="pl-0">
-                                    <MLChart data={data.accounts_chart} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
+                                    <PieChartC data={data.accounts_pie} yaxis={"PCT_WALLETS"} />
                                 </CardContent>
                             </Card>
                         </div>

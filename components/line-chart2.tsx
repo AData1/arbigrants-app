@@ -54,7 +54,7 @@ export function MLChart({ data, xaxis, yaxis, segment, usd }: SBChartProps) {
     const transformedData = transformData(data);
 
     const formatYAxisTick = (value: number) => {
-        return numeral(value).format('0[.]0a'); // Formats the tick value
+        return usd ? `$${numeral(value).format('0[.]0a')}` : numeral(value).format('0[.]0a');
     };
 
     const getMaxValue = (data: TransformedEntry[]) => {

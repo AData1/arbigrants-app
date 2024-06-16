@@ -14,6 +14,8 @@ interface OverviewData {
     gas_pct_stat: { PCT_GAS_SPEND: number }[],
     tvl_chart: any[],
     accounts_chart: any[],
+    tvl_pie: any[],
+    accounts_pie: any[],
     leaderboard: any[],
 }
 
