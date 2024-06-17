@@ -92,7 +92,7 @@ export function MLChart({ data, xaxis, yaxis, segment, usd }: SBChartProps) {
                 />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="grantees" stroke="#d1345b" name="Grantees" />
+                <Line type="monotone" dataKey="grantees" stroke="#381A17" name="Grantees" />
                 {/* <Line type="monotone" dataKey="total" stroke="#1044AD" name="Arbitrum One Total" /> */}
             </LineChart>
         </ResponsiveContainer>

@@ -2,6 +2,7 @@ import { unstable_noStore as noStore } from "next/cache";
 
 interface OverviewDataParams {
     timeframe: string;
+    timescale: string;
 }
 
 interface OverviewData {
@@ -19,9 +20,9 @@ interface OverviewData {
     leaderboard: any[],
 }
 
-export async function getOverviewData({ timeframe }: OverviewDataParams): Promise<OverviewData> {
+export async function getOverviewData({ timeframe, timescale }: OverviewDataParams): Promise<OverviewData> {
     noStore();
-    const response = await fetch(`https://arbigrants-api.onrender.com/overview?timeframe=${timeframe}`);
+    const response = await fetch(`https://arbigrants-api.onrender.com/overview?timeframe=${timeframe}&timescale=${timescale}`);
     if (!response.ok) {
         throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
     }

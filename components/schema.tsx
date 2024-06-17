@@ -10,6 +10,7 @@ export const appSchema = z.object({
     WALLETS: z.number(),
     WALLETS_GROWTH: z.string(),
     CATEGORY: z.string(),
+    CHAIN: z.string(),
 })
 
 export type App = z.infer<typeof appSchema>

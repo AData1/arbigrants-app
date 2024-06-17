@@ -175,4 +175,16 @@ export const columns: ColumnDef<App>[] = [
             return value.includes(row.getValue(id))
         },
     },
+    {
+        accessorKey: "CHAIN",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="CHAIN" />
+        ),
+        cell: ({ row }) => {
+            return row.getValue("CHAIN");
+        },
+        filterFn: (row, id, value) => {
+            return value.includes(row.getValue(id))
+        },
+    },
 ]

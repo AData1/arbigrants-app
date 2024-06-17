@@ -45,6 +45,11 @@ export default async function OverviewPage({ params }: { params: { slug: string 
         timeframe = "week"
     };
 
+    let timescale = params.slug[1];
+    if (timescale === undefined) {
+        timescale = '6'
+    };
+
     let titleparam: string = "Weekly";
     if (timeframe === 'week') {
         titleparam = 'Weekly';
@@ -56,7 +61,7 @@ export default async function OverviewPage({ params }: { params: { slug: string 
 
     let titletime = timeframe.toUpperCase();
 
-    const data = await getOverviewData({ timeframe });
+    const data = await getOverviewData({ timeframe, timescale });
 
     return (
         <>
