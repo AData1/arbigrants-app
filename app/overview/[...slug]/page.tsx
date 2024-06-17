@@ -20,6 +20,7 @@ import PieChartC from "@/components/pie-chart";
 import { StatCard } from "@/components/stat-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TimeSelect } from "@/components/time-select";
+import { ScaleTabs } from "@/components/timescale-select";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/columns";
@@ -72,15 +73,15 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                     </SignedOut>
                     <SignedIn>
                         <TimeSelect />
-                        <div className="grid gap-4 grid-cols-2 md:grid-cols-3">
 
+                        <div className="grid gap-4 grid-cols-2 md:grid-cols-3">
                             <StatCard
                                 title={"GRANTEE'S TVL"}
                                 className="border-black bg-card-bg shadow md:order-1"
                                 content={`$${data.tvl_stat[0].TVL_GRANTEES.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
                             />
                             <StatCard
-                                title={"PAST " + titletime + " GRANTEE'S % OF ARBITRUM TVL"}
+                                title={"GRANTEE'S % OF ARBITRUM TVL"}
                                 className="border-black bg-card-bg shadow md:order-4"
                                 content={data.tvl_pct_stat[0].PCT_TVL < 0.0001 ? '<0.01%' : `${(data.tvl_pct_stat[0].PCT_TVL * 100).toFixed(2)}%`}
                             />
@@ -109,7 +110,7 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                         </div>
                         {/* <p className="text-sm font-bold text-muted-foreground">*ACTIVE WALLET = MADE A TRANSACTION</p> */}
                         {/* <Separator /> */}
-
+                        <ScaleTabs />
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
