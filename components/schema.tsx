@@ -9,6 +9,8 @@ export const appSchema = z.object({
     TRANSACTIONS_GROWTH: z.string(),
     WALLETS: z.number(),
     WALLETS_GROWTH: z.string(),
+    TVL: z.number(),
+    VOLUME: z.number(),
     CATEGORY: z.string(),
     CHAIN: z.string(),
 })
