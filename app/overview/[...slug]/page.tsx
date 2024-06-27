@@ -21,6 +21,7 @@ import { StatCard } from "@/components/stat-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TimeSelect } from "@/components/time-select";
 import { ScaleTabs } from "@/components/timescale-select";
+import { FacetedFilter } from "@/components/excludes-filter";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/columns";
@@ -29,8 +30,9 @@ import { getOverviewData } from "@/app/actions/getOverviewData";
 import MSABarChart from "@/components/marketshare-chart-actions";
 import { MultiLineChart } from "@/components/multi-line-chart";
 import { ChevronUp, ChevronsUp, ChevronDown, ChevronsDown } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton, RedirectToSignIn, SignIn } from '@clerk/nextjs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton, RedirectToSignIn, SignIn } from '@clerk/nextjs';
+import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
     title: "Arbigrants",
@@ -39,17 +41,11 @@ export const metadata: Metadata = {
 
 export const maxDuration = 60;
 
-export default async function OverviewPage({ params }: { params: { slug: string } }) {
-
-    let timeframe = params.slug[0];
-    if (timeframe === undefined) {
-        timeframe = "week"
-    };
-
-    let timescale = params.slug[1];
-    if (timescale === undefined) {
-        timescale = '6'
-    };
+export default async function OverviewPage({ params, searchParams }: {
+    params: { slug: string[] },
+    searchParams: { [key: string]: string | string[] | undefined }
+}) {
+    let [timeframe = 'week', timescale = '6'] = params.slug;
 
     let titleparam: string = "Weekly";
     if (timeframe === 'week') {
@@ -61,8 +57,12 @@ export default async function OverviewPage({ params }: { params: { slug: string 
     }
 
     let titletime = timeframe.toUpperCase();
-
-    const data = await getOverviewData({ timeframe, timescale });
+    const excludes = searchParams.excludes
+        ? Array.isArray(searchParams.excludes)
+            ? searchParams.excludes
+            : [searchParams.excludes]
+        : [];
+    const data = await getOverviewData({ timeframe, timescale, excludes });
 
     return (
         <>
@@ -72,7 +72,13 @@ export default async function OverviewPage({ params }: { params: { slug: string 
                         <RedirectToSignIn />
                     </SignedOut>
                     <SignedIn>
-                        <TimeSelect />
+                        <div className="flex flex-row space-x-6">
+                            <TimeSelect />
+                            <FacetedFilter
+                                title="Exclude"
+                                options={data.name_list}
+                            />
+                        </div>
 
                         <div className="grid gap-4 grid-cols-2 md:grid-cols-3">
                             <StatCard

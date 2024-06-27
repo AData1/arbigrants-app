@@ -3,6 +3,7 @@ import { unstable_noStore as noStore } from "next/cache";
 interface OverviewDataParams {
     timeframe: string;
     timescale: string;
+    excludes?: string[];
 }
 
 interface OverviewData {
@@ -18,11 +19,20 @@ interface OverviewData {
     tvl_pie: any[],
     accounts_pie: any[],
     leaderboard: any[],
+    name_list: any[],
 }
 
-export async function getOverviewData({ timeframe, timescale }: OverviewDataParams): Promise<OverviewData> {
+export async function getOverviewData({ timeframe, timescale, excludes = [] }: OverviewDataParams): Promise<OverviewData> {
     noStore();
-    const response = await fetch(`https://arbigrants-api.onrender.com/overview?timeframe=${timeframe}&timescale=${timescale}`);
+
+    let url = `https://arbigrants-api.onrender.com/overview?timeframe=${timeframe}&timescale=${timescale}`;
+
+    if (excludes.length > 0) {
+        const excludesParam = excludes.map(e => `excludes=${encodeURIComponent(e)}`).join('&');
+        url += `&${excludesParam}`;
+    }
+
+    const response = await fetch(url);
     if (!response.ok) {
         throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
     }
