@@ -74,10 +74,7 @@ export default async function OverviewPage({ params, searchParams }: {
                     <SignedIn>
                         <div className="flex flex-row space-x-6">
                             <TimeSelect />
-                            <FacetedFilter
-                                title="Exclude"
-                                options={data.name_list}
-                            />
+
                         </div>
 
                         <div className="grid gap-4 grid-cols-2 md:grid-cols-3">
@@ -176,6 +173,10 @@ export default async function OverviewPage({ params, searchParams }: {
                                 </CardContent>
                             </Card>
                         </div>
+                        <FacetedFilter
+                            title="Exclude"
+                            options={data.name_list}
+                        />
                         <div >
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
