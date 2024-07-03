@@ -11,19 +11,31 @@ interface PieChartProps {
 }
 
 const PieChartC: React.FC<PieChartProps> = ({ data, yaxis }) => {
+    const presetColors: { [key: string]: string } = {
+        'Pendle': '#1E4480',
+        'Dolomite': '#B2B3B3',
+        'Notional Finance': '#003643',
+        'Overnight Finance': '#8C8DFC',
+        'Moby': '#E6FF85',
+        'Gas.zip': '#3A6EA5',
+        'Other': '#FF9F40'
+    };
+
+    const defaultColors = [
+        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
+        '#4CAF50', '#E91E63', '#9C27B0', '#795548'
+    ];
+
+    const getColor = (name: string, index: number) => {
+        return presetColors[name] || defaultColors[index % defaultColors.length];
+    };
+
     const chartData = {
         labels: data.map((item) => item.NAME),
         datasets: [
             {
                 data: data.map((item) => item[yaxis as keyof typeof item]),
-                backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#4BC0C0',
-                    '#9966FF',
-                    '#FF9F40',
-                ],
+                backgroundColor: data.map((item, index) => getColor(item.NAME, index)),
             },
         ],
     };
