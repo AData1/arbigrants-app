@@ -44,36 +44,6 @@ export const columns: ColumnDef<App>[] = [
         enableHiding: false,
     },
     {
-        accessorKey: "ETH_FEES",
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Gas Fees (ETH)" />
-        ),
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("ETH_FEES"));
-            // const displayValue = amount === 0 ? '-' : amount.toFixed(2);
-            return (
-                <div className="max-w-[500px] truncate font-medium">
-                    {amount.toFixed(4)}
-                </div>
-            )
-        },
-    },
-    {
-        accessorKey: "ETH_FEES_GROWTH",
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Gas Fees Δ" />
-        ),
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("ETH_FEES_GROWTH"));
-            // const displayValue = amount === 0 ? '-' : amount.toFixed(2);
-            return (
-                <div className="max-w-[500px] truncate font-medium">
-                    {amount.toFixed(0)}%
-                </div>
-            )
-        },
-    },
-    {
         accessorKey: "TRANSACTIONS",
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="Transactions" />
@@ -103,6 +73,7 @@ export const columns: ColumnDef<App>[] = [
             )
         },
     },
+
     {
         accessorKey: "WALLETS",
         header: ({ column }) => (
@@ -133,6 +104,7 @@ export const columns: ColumnDef<App>[] = [
             )
         },
     },
+
     {
         accessorKey: "TVL",
         header: ({ column }) => (
@@ -148,6 +120,40 @@ export const columns: ColumnDef<App>[] = [
             )
         },
     },
+
+    {
+        accessorKey: "ETH_FEES",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Gas Fees (ETH)" />
+        ),
+        cell: ({ row }) => {
+            const amount = parseFloat(row.getValue("ETH_FEES"));
+            // const displayValue = amount === 0 ? '-' : amount.toFixed(2);
+            return (
+                <div className="max-w-[500px] truncate font-medium">
+                    {amount.toFixed(4)}
+                </div>
+            )
+        },
+    },
+    {
+        accessorKey: "ETH_FEES_GROWTH",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Gas Fees Δ" />
+        ),
+        cell: ({ row }) => {
+            const amount = parseFloat(row.getValue("ETH_FEES_GROWTH"));
+            // const displayValue = amount === 0 ? '-' : amount.toFixed(2);
+            return (
+                <div className="max-w-[500px] truncate font-medium">
+                    {amount.toFixed(0)}%
+                </div>
+            )
+        },
+    },
+
+
+
     {
         accessorKey: "VOLUME",
         header: ({ column }) => (

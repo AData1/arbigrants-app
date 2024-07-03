@@ -92,7 +92,7 @@ export function MultiLineChart({ data, xaxis, yaxis, segment, usd }: SBChartProp
                 />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="grantees" stroke="#d1345b" name="Grantees" />
+                <Line type="monotone" dataKey="grantees" stroke="#FF694A" name="Grantees" />
                 <Line type="monotone" dataKey="total" stroke="#1044AD" name="Arbitrum One Total" />
             </LineChart>
         </ResponsiveContainer>
