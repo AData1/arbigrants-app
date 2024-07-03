@@ -13,6 +13,7 @@ import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/columns";
 import { getGranteeData } from "@/app/actions/getGranteeData";
 import LChart from "@/components/line-chart";
+import LDChart from "@/components/line-chart-decimals";
 import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton, RedirectToSignIn, SignIn } from '@clerk/nextjs';
 import Link from "next/link";
 import Image from "next/image";
@@ -93,7 +94,7 @@ export default async function GranteePage({ params }: { params: { slug: string }
                                     <CardTitle>{titleparam + " Gas Spend (ETH)"}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="pl-0">
-                                    <LChart data={data.gas_chart} yaxis={"GAS_SPEND"} usd={false} fill="#000000" />
+                                    <LDChart data={data.gas_chart} yaxis={"GAS_SPEND"} usd={false} fill="#000000" />
                                 </CardContent>
                             </Card>
                             <Card className="border-black shadow-custom shadow bg-card-bg">

@@ -71,6 +71,26 @@ export function MultiLineChart({ data, xaxis, yaxis, segment, usd }: SBChartProp
 
     const maxValue = getMaxValue(transformedData);
 
+    const formatTooltipValue = (value: number) => {
+        return numeral(Math.round(value)).format('0,0');
+    };
+
+    const CustomTooltip = ({ active, payload, label }: any) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="custom-tooltip" style={{ backgroundColor: 'white', padding: '10px', border: '1px solid #ccc' }}>
+                    <p className="label">{`Date: ${label}`}</p>
+                    {payload.map((pld: any, index: number) => (
+                        <p key={index} style={{ color: pld.color }}>
+                            {`${pld.name}: ${formatTooltipValue(pld.value)}`}
+                        </p>
+                    ))}
+                </div>
+            );
+        }
+        return null;
+    };
+
     return (
         <ResponsiveContainer width="100%" height={350}>
             <LineChart data={transformedData}>
@@ -90,7 +110,7 @@ export function MultiLineChart({ data, xaxis, yaxis, segment, usd }: SBChartProp
                     tickFormatter={formatYAxisTick}
                     domain={[0, maxValue * 1.06]}
                 />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
                 <Legend />
                 <Line type="monotone" dataKey="grantees" stroke="#FF694A" name="Grantees" />
                 <Line type="monotone" dataKey="total" stroke="#1044AD" name="Arbitrum One Total" />
