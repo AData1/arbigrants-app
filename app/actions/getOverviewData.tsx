@@ -15,6 +15,7 @@ interface OverviewData {
     gas_stat: { GAS_SPEND: number }[],
     gas_pct_stat: { PCT_GAS_SPEND: number }[],
     tvl_chart: any[],
+    tvl_chart_eth: any[],
     accounts_chart: any[],
     tvl_pie: any[],
     accounts_pie: any[],
