@@ -21,6 +21,7 @@ import { StatCard } from "@/components/stat-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TimeSelect } from "@/components/time-select";
 import { ScaleTabs } from "@/components/timescale-select";
+import { CurrencyTabs } from "@/components/currency-select";
 import { FacetedFilter } from "@/components/excludes-filter";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/data-table";
@@ -45,7 +46,7 @@ export default async function OverviewPage({ params, searchParams }: {
     params: { slug: string[] },
     searchParams: { [key: string]: string | string[] | undefined }
 }) {
-    let [timeframe = 'week', timescale = '6'] = params.slug;
+    let [timeframe = 'week', timescale = '6', currency = 'USD'] = params.slug;
 
     let titleparam: string = "Weekly";
     if (timeframe === 'week') {
@@ -57,11 +58,13 @@ export default async function OverviewPage({ params, searchParams }: {
     }
 
     let titletime = timeframe.toUpperCase();
+
     const excludes = searchParams.excludes
         ? Array.isArray(searchParams.excludes)
             ? searchParams.excludes
             : [searchParams.excludes]
         : [];
+
     const data = await getOverviewData({ timeframe, timescale, excludes });
 
     return (
@@ -113,11 +116,14 @@ export default async function OverviewPage({ params, searchParams }: {
                         </div>
                         {/* <p className="text-sm font-bold text-muted-foreground">*ACTIVE WALLET = MADE A TRANSACTION</p> */}
                         {/* <Separator /> */}
-                        <ScaleTabs />
+                        <div className="flex flex-row space-x-6">
+                            <ScaleTabs />
+                            <CurrencyTabs />
+                        </div>
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
-                                    <CardTitle>{"TVL"}</CardTitle>
+                                    <CardTitle>{currency === 'USD' ? "TVL (USD)" : "TVL (ETH)"}</CardTitle>
                                 </CardHeader>
                                 <CardContent >
                                     <Tabs defaultValue="both">
@@ -126,10 +132,22 @@ export default async function OverviewPage({ params, searchParams }: {
                                             <TabsTrigger value="grantee" className="[&[data-state='active']]:bg-[#9DCCED]">Grantees Only</TabsTrigger>
                                         </TabsList>
                                         <TabsContent value="both" className="pt-3">
-                                            <MultiLineChart data={data.tvl_chart} xaxis={"DATE"} yaxis={"TVL"} segment={"CATEGORY"} usd={true} />
+                                            <MultiLineChart
+                                                data={currency === 'USD' ? data.tvl_chart : data.tvl_chart_eth}
+                                                xaxis={"DATE"}
+                                                yaxis={currency === 'USD' ? 'TVL' : 'TVL_ETH'}
+                                                segment={"CATEGORY"}
+                                                usd={currency === 'USD'}
+                                            />
                                         </TabsContent>
                                         <TabsContent value="grantee" className="pt-3">
-                                            <MLChart data={data.tvl_chart} xaxis={"DATE"} yaxis={"TVL"} segment={"CATEGORY"} usd={true} />
+                                            <MLChart
+                                                data={currency === 'USD' ? data.tvl_chart : data.tvl_chart_eth}
+                                                xaxis={"DATE"}
+                                                yaxis={currency === 'USD' ? 'TVL' : 'TVL_ETH'}
+                                                segment={"CATEGORY"}
+                                                usd={currency === 'USD'}
+                                            />
                                         </TabsContent>
                                     </Tabs>
                                 </CardContent>
@@ -166,7 +184,7 @@ export default async function OverviewPage({ params, searchParams }: {
                             </Card>
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
-                                    <CardTitle>{"Past " + timeframe + " Active Accounts by Project"}</CardTitle>
+                                    <CardTitle>{"Past " + titletime + " Active Accounts by Project"}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="pl-0">
                                     <PieChartC data={data.accounts_pie} yaxis={"PCT_WALLETS"} />
@@ -180,7 +198,7 @@ export default async function OverviewPage({ params, searchParams }: {
                         <div >
                             <Card className="border-black shadow-custom shadow bg-card-bg">
                                 <CardHeader>
-                                    <CardTitle>{"Past " + timeframe + " Grantee Summary"}</CardTitle>
+                                    <CardTitle>{"Past " + titletime + " Grantee Summary"}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <DataTable data={data.leaderboard} columns={columns} link_names={true} />

@@ -5,10 +5,10 @@ import moment from 'moment';
 import numeral from 'numeral';
 
 type DataEntry = {
-    BUNDLER_NAME: string;
+    CATEGORY: string;
     DATE: string;
-    NUM_ACCOUNTS?: number;
-    NUM_BUNDLES?: number;
+    TVL?: number;
+    TVL_ETH?: number;
     [key: string]: string | number | undefined;
 };
 
