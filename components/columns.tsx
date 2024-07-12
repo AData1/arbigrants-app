@@ -127,10 +127,10 @@ export const columns: ColumnDef<App>[] = [
         ),
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("COMPLETION"));
-            const displayValue = amount === 0 ? '-' : Math.round(amount).toLocaleString();
+            // const displayValue = amount === 0 ? '-' : amount.toFixed(2);
             return (
                 <div className="max-w-[500px] truncate font-medium">
-                    ${displayValue}
+                    {amount.toFixed(0)}%
                 </div>
             )
         },
