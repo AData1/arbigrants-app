@@ -120,21 +120,21 @@ export const columns: ColumnDef<App>[] = [
             )
         },
     },
-    {
-        accessorKey: "COMPLETION",
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Completion" />
-        ),
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("COMPLETION"));
-            // const displayValue = amount === 0 ? '-' : amount.toFixed(2);
-            return (
-                <div className="max-w-[500px] truncate font-medium">
-                    {amount.toFixed(0)}%
-                </div>
-            )
-        },
-    },
+    // {
+    //     accessorKey: "COMPLETION",
+    //     header: ({ column }) => (
+    //         <DataTableColumnHeader column={column} title="Completion" />
+    //     ),
+    //     cell: ({ row }) => {
+    //         const amount = parseFloat(row.getValue("COMPLETION"));
+    //         // const displayValue = amount === 0 ? '-' : amount.toFixed(2);
+    //         return (
+    //             <div className="max-w-[500px] truncate font-medium">
+    //                 {amount.toFixed(0)}%
+    //             </div>
+    //         )
+    //     },
+    // },
 
     {
         accessorKey: "ETH_FEES",
