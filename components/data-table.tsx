@@ -44,7 +44,11 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
     const [rowSelection, setRowSelection] = React.useState({})
     const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({})
+        React.useState<VisibilityState>({
+            TRANSACTIONS_GROWTH: false,
+            WALLETS_GROWTH: false,
+            ETH_FEES_GROWTH: false,
+        })
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
     )
@@ -62,6 +66,11 @@ export function DataTable<TData, TValue>({
         initialState: {
             pagination: {
                 pageSize: 5,
+            },
+            columnVisibility: {
+                TRANSACTIONS_GROWTH: false,
+                WALLETS_GROWTH: false,
+                ETH_FEES_GROWTH: false,
             },
         },
         enableRowSelection: true,
