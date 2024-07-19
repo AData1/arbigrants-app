@@ -13,6 +13,10 @@ interface LlamaBool {
     LLAMA_COUNT: number;
 }
 
+interface GrantDateBool {
+    GRANT_DATE_COUNT: number;
+}
+
 interface GranteeData {
     info: GranteeInfo[];
     wallets_chart: any[];
@@ -20,6 +24,8 @@ interface GranteeData {
     txns_chart: any[];
     tvl_chart: any[];
     llama_bool: LlamaBool[];
+    grant_date: any[] | 0;
+    grant_date_bool: GrantDateBool[];
 }
 
 interface GranteeDataParams {

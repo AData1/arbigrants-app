@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer, ReferenceLine } from 'recharts';
 import moment from 'moment';
 import numeral from 'numeral';
 import { TooltipProps } from 'recharts';
@@ -15,6 +15,7 @@ interface LineChartProps {
     yaxis: string;
     usd: boolean;
     fill: string;
+    date_label?: string;
 }
 
 const formatDate = (date: string) => {
@@ -34,7 +35,7 @@ const CustomTooltip: React.FC<TooltipProps<any, any>> = ({ active, payload, labe
     return null;
 };
 
-const LDChart: React.FC<LineChartProps> = ({ data, yaxis, usd, fill }) => {
+const LDChart: React.FC<LineChartProps> = ({ data, yaxis, usd, fill, date_label }) => {
 
     const transformedData = data.map(item => ({
         ...item,
@@ -69,6 +70,27 @@ const LDChart: React.FC<LineChartProps> = ({ data, yaxis, usd, fill }) => {
         return null;
     };
 
+    // Function to find the closest date
+    const findClosestDate = () => {
+        if (!date_label) return null;
+        const labelDate = moment(date_label, 'MM/DD/YYYY');
+        let closestDate = null;
+        let smallestDiff = Infinity;
+
+        transformedData.forEach(item => {
+            const currentDate = moment(item.DATE, 'YYYY-MM-DD');
+            const diff = Math.abs(labelDate.diff(currentDate));
+            if (diff < smallestDiff) {
+                smallestDiff = diff;
+                closestDate = item.DATE;
+            }
+        });
+
+        return closestDate;
+    };
+
+    const closestDate = findClosestDate();
+
     return (
         <ResponsiveContainer width="100%" height={300}>
             <LineChart data={transformedData}>
@@ -91,7 +113,11 @@ const LDChart: React.FC<LineChartProps> = ({ data, yaxis, usd, fill }) => {
                 />
                 <Tooltip content={<CustomTooltip />} />
                 <Line type="monotone" dataKey={yaxis} stroke={fill} />
+                {closestDate && (
+                    <ReferenceLine x={closestDate} stroke="red" strokeWidth={2} />
+                )}
             </LineChart>
+
         </ResponsiveContainer>
     );
 };

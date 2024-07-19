@@ -94,7 +94,7 @@ export default async function GranteePage({ params }: { params: { slug: string }
                                     <CardTitle>{titleparam + " Gas Spend (ETH)"}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="pl-0">
-                                    <LDChart data={data.gas_chart} yaxis={"GAS_SPEND"} usd={false} fill="#000000" />
+                                    <LDChart data={data.gas_chart} yaxis={"GAS_SPEND"} usd={false} fill="#000000" date_label={data.grant_date !== 0 ? data.grant_date[0].GRANT_DATE : 0} />
                                 </CardContent>
                             </Card>
                             <Card className="border-black shadow-custom shadow bg-card-bg">
@@ -102,7 +102,7 @@ export default async function GranteePage({ params }: { params: { slug: string }
                                     <CardTitle>{titleparam + " Active Accounts"}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="pl-0">
-                                    <LChart data={data.wallets_chart} yaxis={"ACTIVE_WALLETS"} usd={false} fill="#000000" />
+                                    <LChart data={data.wallets_chart} yaxis={"ACTIVE_WALLETS"} usd={false} fill="#000000" date_label={data.grant_date !== 0 ? data.grant_date[0].GRANT_DATE : 0} />
                                 </CardContent>
                             </Card>
                         </div>
@@ -112,7 +112,7 @@ export default async function GranteePage({ params }: { params: { slug: string }
                                     <CardTitle>{titleparam + " Transactions"}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="pl-0">
-                                    <LChart data={data.txns_chart} yaxis={"TRANSACTIONS"} usd={false} fill="#000000" />
+                                    <LChart data={data.txns_chart} yaxis={"TRANSACTIONS"} usd={false} fill="#000000" date_label={data.grant_date !== 0 ? data.grant_date[0].GRANT_DATE : 0} />
                                 </CardContent>
                             </Card>
                             {data.llama_bool[0].LLAMA_COUNT !== 0 && (
@@ -121,7 +121,7 @@ export default async function GranteePage({ params }: { params: { slug: string }
                                         <CardTitle>{"TVL"}</CardTitle>
                                     </CardHeader>
                                     <CardContent className="pl-0">
-                                        <LChart data={data.tvl_chart} yaxis={"TVL"} usd={false} fill="#000000" />
+                                        <LChart data={data.tvl_chart} yaxis={"TVL"} usd={false} fill="#000000" date_label={data.grant_date !== 0 ? data.grant_date[0].GRANT_DATE : 0} />
                                     </CardContent>
                                 </Card>
                             )}
