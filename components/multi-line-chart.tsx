@@ -111,6 +111,7 @@ export function MultiLineChart({ data, xaxis, yaxis, segment, usd }: SBChartProp
                     domain={[0, maxValue * 1.06]}
                 />
                 <Tooltip content={<CustomTooltip />} />
+
                 <Legend />
                 <Line type="monotone" dataKey="grantees" stroke="#FF694A" name="Grantees" />
                 <Line type="monotone" dataKey="total" stroke="#1044AD" name="Arbitrum One Total" />

@@ -129,7 +129,8 @@ export default async function OverviewPage({ params, searchParams }: {
                                     <Tabs defaultValue="both">
                                         <TabsList className="bg-[#DCECF9]">
                                             <TabsTrigger value="both" className="[&[data-state='active']]:bg-[#9DCCED]">Comparison</TabsTrigger>
-                                            <TabsTrigger value="grantee" className="[&[data-state='active']]:bg-[#9DCCED]">Grantees Only</TabsTrigger>
+                                            <TabsTrigger value="grantee" className="[&[data-state='active']]:bg-[#9DCCED]">Full-History</TabsTrigger>
+                                            <TabsTrigger value="postgrant" className="[&[data-state='active']]:bg-[#9DCCED]">Post-Grant</TabsTrigger>
                                         </TabsList>
                                         <TabsContent value="both" className="pt-3">
                                             <MultiLineChart
@@ -149,6 +150,15 @@ export default async function OverviewPage({ params, searchParams }: {
                                                 usd={currency === 'USD'}
                                             />
                                         </TabsContent>
+                                        <TabsContent value="postgrant" className="pt-3">
+                                            <MLChart
+                                                data={currency === 'USD' ? data.tvl_chart_post_grant : data.tvl_chart_eth_post_grant}
+                                                xaxis={"DATE"}
+                                                yaxis={currency === 'USD' ? 'TVL' : 'TVL_ETH'}
+                                                segment={"CATEGORY"}
+                                                usd={currency === 'USD'}
+                                            />
+                                        </TabsContent>
                                     </Tabs>
                                 </CardContent>
                             </Card>
@@ -160,13 +170,17 @@ export default async function OverviewPage({ params, searchParams }: {
                                     <Tabs defaultValue="both">
                                         <TabsList className="bg-[#DCECF9]">
                                             <TabsTrigger value="both" className="[&[data-state='active']]:bg-[#9DCCED]">Comparison</TabsTrigger>
-                                            <TabsTrigger value="grantee" className="[&[data-state='active']]:bg-[#9DCCED]">Grantees Only</TabsTrigger>
+                                            <TabsTrigger value="grantee" className="[&[data-state='active']]:bg-[#9DCCED]">Full-History</TabsTrigger>
+                                            <TabsTrigger value="postgrant" className="[&[data-state='active']]:bg-[#9DCCED]">Post-Grant</TabsTrigger>
                                         </TabsList>
                                         <TabsContent value="both" className="pt-3">
                                             <MultiLineChart data={data.accounts_chart} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
                                         </TabsContent>
                                         <TabsContent value="grantee" className="pt-3">
                                             <MLChart data={data.accounts_chart} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
+                                        </TabsContent>
+                                        <TabsContent value="postgrant" className="pt-3">
+                                            <MLChart data={data.accounts_chart_post_grant} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
                                         </TabsContent>
                                     </Tabs>
 
