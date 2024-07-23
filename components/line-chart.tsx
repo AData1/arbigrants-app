@@ -71,6 +71,26 @@ const LChart: React.FC<LineChartProps> = ({ data, yaxis, usd, fill, date_label }
 
     const closestDate = findClosestDate();
 
+    const formatTooltipValue = (value: number) => {
+        return numeral(Math.round(value)).format('0,0');
+    };
+
+    const CustomTooltip = ({ active, payload, label }: any) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="custom-tooltip" style={{ backgroundColor: 'white', padding: '10px', border: '1px solid #ccc' }}>
+                    <p className="label">{`Date: ${label}`}</p>
+                    {payload.map((pld: any, index: number) => (
+                        <p key={index} style={{ color: pld.color }}>
+                            {`${pld.name}: ${formatTooltipValue(pld.value)}`}
+                        </p>
+                    ))}
+                </div>
+            );
+        }
+        return null;
+    };
+
     return (
         <ResponsiveContainer width="100%" height={300}>
             <LineChart data={transformedData}>
@@ -91,7 +111,8 @@ const LChart: React.FC<LineChartProps> = ({ data, yaxis, usd, fill, date_label }
                     tickLine={false}
                     axisLine={false}
                 />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
+
                 <Line type="monotone" dataKey={yaxis} stroke={fill} />
                 {closestDate && (
                     <ReferenceLine x={closestDate} stroke="red" strokeWidth={2} />
