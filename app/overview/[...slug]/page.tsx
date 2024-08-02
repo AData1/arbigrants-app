@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import { MLChart } from "@/components/line-chart2";
+import LChart from "@/components/line-chart";
 import PieChartC from "@/components/pie-chart";
 import { StatCard } from "@/components/stat-card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -151,13 +152,11 @@ export default async function OverviewPage({ params, searchParams }: {
                                             />
                                         </TabsContent>
                                         <TabsContent value="postgrant" className="pt-3">
-                                            <MLChart
+                                            <LChart
                                                 data={currency === 'USD' ? data.tvl_chart_post_grant : data.tvl_chart_eth_post_grant}
-                                                xaxis={"DATE"}
                                                 yaxis={currency === 'USD' ? 'TVL' : 'TVL_ETH'}
-                                                segment={"CATEGORY"}
                                                 usd={currency === 'USD'}
-                                            />
+                                                fill="#000000" />
                                         </TabsContent>
                                     </Tabs>
                                 </CardContent>
@@ -180,7 +179,7 @@ export default async function OverviewPage({ params, searchParams }: {
                                             <MLChart data={data.accounts_chart} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
                                         </TabsContent>
                                         <TabsContent value="postgrant" className="pt-3">
-                                            <MLChart data={data.accounts_chart_post_grant} xaxis={"DATE"} yaxis={"ACTIVE_WALLETS"} segment={"CATEGORY"} usd={false} />
+                                            <LChart data={data.accounts_chart_post_grant} yaxis={"ACTIVE_WALLETS"} usd={false} fill="#000000" />
                                         </TabsContent>
                                     </Tabs>
 
