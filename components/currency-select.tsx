@@ -12,7 +12,9 @@ export function CurrencyTabs() {
 
     const handleTabChange = (newValue: string) => {
         const segments = pathname.split("/");
-        return router.push(`/${segments[1]}/${segments[2]}/all/6/${newValue}`);
+        const thirdSegment = segments[3] || "all";
+        const fourthSegment = segments[4] || "6";
+        return router.push(`/${segments[1]}/${segments[2]}/${thirdSegment}/${fourthSegment}/${newValue}`);
 
     };
 

@@ -12,7 +12,8 @@ export function ScaleTabs() {
 
     const handleTabChange = (newValue: string) => {
         const segments = pathname.split("/");
-        return router.push(`/${segments[1]}/${segments[2]}/all/${newValue}`);
+        const thirdSegment = segments[3] || "all";
+        return router.push(`/${segments[1]}/${segments[2]}/${thirdSegment}/${newValue}`);
     };
 
     useEffect(() => {
