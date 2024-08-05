@@ -12,12 +12,12 @@ export function ScaleTabs() {
 
     const handleTabChange = (newValue: string) => {
         const segments = pathname.split("/");
-        return router.push(`/${segments[1]}/${segments[2]}/${newValue}`);
+        return router.push(`/${segments[1]}/${segments[2]}/all/${newValue}`);
     };
 
     useEffect(() => {
         const segments = pathname.split("/");
-        setActiveTab(segments[3]);
+        setActiveTab(segments[4]);
     }, [pathname]);
 
     const segments = pathname.split("/");

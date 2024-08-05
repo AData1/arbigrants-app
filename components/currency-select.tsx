@@ -12,12 +12,13 @@ export function CurrencyTabs() {
 
     const handleTabChange = (newValue: string) => {
         const segments = pathname.split("/");
-        return router.push(`/${segments[1]}/${segments[2]}/6/${newValue}`);
+        return router.push(`/${segments[1]}/${segments[2]}/all/6/${newValue}`);
+
     };
 
     useEffect(() => {
         const segments = pathname.split("/");
-        setActiveTab(segments[4]);
+        setActiveTab(segments[5]);
     }, [pathname]);
 
     const segments = pathname.split("/");

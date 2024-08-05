@@ -21,6 +21,7 @@ import PieChartC from "@/components/pie-chart";
 import { StatCard } from "@/components/stat-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TimeSelect } from "@/components/time-select";
+import { ChainTabs } from "@/components/chain-select";
 import { ScaleTabs } from "@/components/timescale-select";
 import { CurrencyTabs } from "@/components/currency-select";
 import { FacetedFilter } from "@/components/excludes-filter";
@@ -47,7 +48,7 @@ export default async function OverviewPage({ params, searchParams }: {
     params: { slug: string[] },
     searchParams: { [key: string]: string | string[] | undefined }
 }) {
-    let [timeframe = 'week', timescale = '6', currency = 'USD'] = params.slug;
+    let [timeframe = 'week', chain = 'all', timescale = '6', currency = 'USD'] = params.slug;
 
     let titleparam: string = "Weekly";
     if (timeframe === 'week') {
@@ -58,6 +59,7 @@ export default async function OverviewPage({ params, searchParams }: {
         titleparam = 'Monthly';
     }
 
+
     let titletime = timeframe.toUpperCase();
 
     const excludes = searchParams.excludes
@@ -66,7 +68,7 @@ export default async function OverviewPage({ params, searchParams }: {
             : [searchParams.excludes]
         : [];
 
-    const data = await getOverviewData({ timeframe, timescale, excludes });
+    const data = await getOverviewData({ timeframe, timescale, chain, excludes });
 
     return (
         <>
@@ -76,9 +78,44 @@ export default async function OverviewPage({ params, searchParams }: {
                         <RedirectToSignIn />
                     </SignedOut>
                     <SignedIn>
+                        <div className="grid gap-4 grid-cols-2 md:grid-cols-3">
+                            <StatCard
+                                title={"NUMBER OF GRANTEES"}
+                                className="border-black bg-card-bg shadow md:order-1"
+                                content={`${data.milestones[0].NUM_GRANTEES.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
+                            />
+                            <StatCard
+                                title={"% OF MILESTONES COMPLETED"}
+                                className="border-black bg-card-bg shadow md:order-4"
+                                content={`${(data.milestones[0].PCT_MILESTONES_COMPLETED * 100).toFixed(2)}%`}
+                            />
+
+                            <StatCard
+                                title={"NUMBER OF MILESTONES AGREED"}
+                                className="border-black bg-card-bg shadow md:order-2"
+                                content={data.milestones[0].TOTAL_MILESTONES.toLocaleString()}
+                            />
+                            <StatCard
+                                title={"% OF GRANTEES FULLY COMPLETED"}
+                                className="border-black bg-card-bg shadow md:order-5"
+                                content={`${(data.milestones[0].PCT_FULL_COMPLETION * 100).toFixed(2)}%`}
+                            />
+
+                            <StatCard
+                                title={"NUMBER OF MILESTONES COMPLETED"}
+                                className="border-black bg-card-bg shadow md:order-3"
+                                content={data.milestones[0].MILESTONES_COMPLETED.toLocaleString()}
+                            />
+                            <StatCard
+                                title={"% OF GRANTEES WITH 1+ MILESTONE COMPLETED"}
+                                className="border-black bg-card-bg shadow md:order-6"
+                                content={`${(data.milestones[0].PCT_NON_ZERO_PROGRESS * 100).toFixed(2)}%`}
+                            />
+                        </div>
+
                         <div className="flex flex-row space-x-6">
                             <TimeSelect />
-
+                            <ChainTabs />
                         </div>
 
                         <div className="grid gap-4 grid-cols-2 md:grid-cols-3">
@@ -88,7 +125,7 @@ export default async function OverviewPage({ params, searchParams }: {
                                 content={`$${data.tvl_stat[0].TVL_GRANTEES.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
                             />
                             <StatCard
-                                title={"GRANTEE'S % OF ARBITRUM TVL"}
+                                title={"GRANTEE'S % OF ARBITRUM ONE TVL"}
                                 className="border-black bg-card-bg shadow md:order-4"
                                 content={data.tvl_pct_stat[0].PCT_TVL < 0.0001 ? '<0.01%' : `${(data.tvl_pct_stat[0].PCT_TVL * 100).toFixed(2)}%`}
                             />
@@ -99,7 +136,7 @@ export default async function OverviewPage({ params, searchParams }: {
                                 content={data.wallets_stat[0].ACTIVE_WALLETS.toLocaleString()}
                             />
                             <StatCard
-                                title={"PAST " + titletime + " GRANTEE'S % OF ARBITRUM WALLETS"}
+                                title={"PAST " + titletime + " GRANTEE'S % OF ARBITRUM ONE WALLETS"}
                                 className="border-black bg-card-bg shadow md:order-5"
                                 content={data.wallets_pct_stat[0].PCT_WALLETS < 0.0001 ? '<0.01%' : `${(data.wallets_pct_stat[0].PCT_WALLETS * 100).toFixed(2)}%`}
                             />
@@ -110,7 +147,7 @@ export default async function OverviewPage({ params, searchParams }: {
                                 content={`${Number(data.gas_stat[0].GAS_SPEND).toFixed(3)} ETH`}
                             />
                             <StatCard
-                                title={"PAST " + titletime + " GRANTEE'S % OF ARBITRUM GAS SPEND"}
+                                title={"PAST " + titletime + " GRANTEE'S % OF ARBITRUM ONE GAS SPEND"}
                                 className="border-black bg-card-bg shadow md:order-6"
                                 content={data.gas_pct_stat[0].PCT_GAS_SPEND < 0.0001 ? '<0.01%' : `${(data.gas_pct_stat[0].PCT_GAS_SPEND * 100).toFixed(2)}%`}
                             />
