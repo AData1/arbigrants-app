@@ -26,6 +26,7 @@ interface GranteeData {
     llama_bool: LlamaBool[];
     grant_date: any[] | 0;
     grant_date_bool: GrantDateBool[];
+    milestones: any[];
 }
 
 interface GranteeDataParams {

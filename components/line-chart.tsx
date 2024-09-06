@@ -53,7 +53,7 @@ const LChart: React.FC<LineChartProps> = ({ data, yaxis, usd, fill, date_label }
     // Function to find the closest date
     const findClosestDate = () => {
         if (!date_label) return null;
-        const labelDate = moment(date_label, 'MM/DD/YYYY');
+        const labelDate = moment(date_label, 'YYYY-MM-DD');
         let closestDate = null;
         let smallestDiff = Infinity;
 

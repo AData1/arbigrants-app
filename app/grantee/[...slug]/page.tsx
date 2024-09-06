@@ -75,6 +75,11 @@ export default async function GranteePage({ params }: { params: { slug: string }
                                         {data.info[0].DESCRIPTION}
                                     </p>
                                 </div>
+                                <div className="space-y-2">
+                                    <p>
+                                        Milestones Completed: {data.milestones[0].MILESTONES_COMPLETED} / {data.milestones[0].TOTAL_MILESTONES}
+                                    </p>
+                                </div>
                                 <div className="flex items-center gap-4">
                                     <Link className="inline-flex items-center gap-2 text-primary hover:underline" href={data.info[0].WEBSITE}>
                                         <Link2Icon className="h-5 w-5" />
