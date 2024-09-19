@@ -7,7 +7,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { StatCard } from "@/components/stat-card";
-import { TimeSelect } from "@/components/time-select";
+import { TimeSelect } from "@/components/time-select-grantee";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/columns";
