@@ -92,7 +92,7 @@ const LChart: React.FC<LineChartProps> = ({ data, yaxis, usd, fill, date_label }
     };
 
     return (
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={350}>
             <LineChart data={transformedData}>
                 <CartesianGrid vertical={false} horizontal={true} strokeDasharray="3 3" stroke="black" />
                 <XAxis dataKey="DATE"
