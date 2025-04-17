@@ -164,7 +164,7 @@ export default async function OverviewPage({ params, searchParams }: {
                                     <CardTitle>{currency === 'USD' ? "TVL (USD)" : "TVL (ETH)"}</CardTitle>
                                 </CardHeader>
                                 <CardContent >
-                                    <Tabs defaultValue="both">
+                                    <Tabs defaultValue="grantee">
                                         <TabsList className="bg-[#DCECF9]">
                                             {/* <TabsTrigger value="both" className="[&[data-state='active']]:bg-[#9DCCED]">Comparison</TabsTrigger> */}
                                             <TabsTrigger value="grantee" className="[&[data-state='active']]:bg-[#9DCCED]">Full-History</TabsTrigger>
