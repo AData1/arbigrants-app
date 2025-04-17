@@ -13,27 +13,27 @@ import numeral from 'numeral';
 import Image from "next/image";
 
 export const columns: ColumnDef<App>[] = [
-    {
-        accessorKey: "LOGO",
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title=" " />
-        ),
-        cell: ({ row }) => {
-            return (
-                <Image
-                    alt="Logo"
-                    className="aspect-square rounded-md object-cover"
-                    height="64"
-                    src={row.getValue("LOGO")}
-                    width="64"
-                />
-            )
-        },
-        // cell: ({ row }) => <div className="w-[80px]">{row.getValue("LOGO")}</div>,
-        // rewrite this so its Image instead of div where source is RowSelection.getvalue logo
-        enableSorting: false,
-        enableHiding: false,
-    },
+    // {
+    //     accessorKey: "LOGO",
+    //     header: ({ column }) => (
+    //         <DataTableColumnHeader column={column} title=" " />
+    //     ),
+    //     cell: ({ row }) => {
+    //         return (
+    //             <Image
+    //                 alt="Logo"
+    //                 className="aspect-square rounded-md object-cover"
+    //                 height="64"
+    //                 src={row.getValue("LOGO")}
+    //                 width="64"
+    //             />
+    //         )
+    //     },
+    //     // cell: ({ row }) => <div className="w-[80px]">{row.getValue("LOGO")}</div>,
+    //     // rewrite this so its Image instead of div where source is RowSelection.getvalue logo
+    //     enableSorting: false,
+    //     enableHiding: false,
+    // },
     {
         accessorKey: "PROJECT",
         header: ({ column }) => (
