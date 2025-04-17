@@ -1,13 +1,13 @@
 import {
     StackIcon,
-    StopIcon,
-    Cross1Icon,
     ShadowOuterIcon,
     ComponentInstanceIcon,
     MixIcon,
     AvatarIcon,
     FileTextIcon,
-    ImageIcon
+    ImageIcon,
+    BarChartIcon,
+    ListBulletIcon
 } from "@radix-ui/react-icons"
 
 export const categories = [
@@ -35,6 +35,16 @@ export const categories = [
         value: "Social",
         label: "Social",
         icon: AvatarIcon,
+    },
+    {
+        value: "Fintech",
+        label: "Fintech",
+        icon: BarChartIcon,
+    },
+    {
+        value: "Enterprise",
+        label: "Enterprise",
+        icon: ListBulletIcon,
     },
     {
         value: "NFT",
