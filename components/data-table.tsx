@@ -120,7 +120,7 @@ export function DataTable<TData, TValue>({
                                     {row.getVisibleCells().map((cell, index) => {
                                         return (
                                             <TableCell key={cell.id}>
-                                                {index === 1 && link_names ? (
+                                                {index === 0 && link_names ? (
                                                     <Link href={`/grantee/week/${cell.getValue()}`}>
                                                         <p className="font-bold text-blue-600">
                                                             {cell.getValue() as string}
