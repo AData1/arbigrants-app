@@ -125,9 +125,9 @@ export default async function OverviewPage({ params, searchParams }: {
                                 content={`$${data.tvl_stat[0].TVL_GRANTEES.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
                             />
                             <StatCard
-                                title={"0"}
+                                title={" "}
                                 className="border-black bg-card-bg shadow md:order-4"
-                                content={0}
+                                content={' '}
                             />
 
                             <StatCard
