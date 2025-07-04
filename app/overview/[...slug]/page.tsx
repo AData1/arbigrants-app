@@ -125,9 +125,9 @@ export default async function OverviewPage({ params, searchParams }: {
                                 content={`$${data.tvl_stat[0].TVL_GRANTEES.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
                             />
                             <StatCard
-                                title={"GRANTEE'S % OF ARBITRUM ONE TVL"}
+                                title={"0"}
                                 className="border-black bg-card-bg shadow md:order-4"
-                                content={data.tvl_pct_stat[0].PCT_TVL < 0.0001 ? '<0.01%' : `${(data.tvl_pct_stat[0].PCT_TVL * 100).toFixed(2)}%`}
+                                content={0}
                             />
 
                             <StatCard

@@ -12,7 +12,7 @@ interface OverviewData {
     wallets_stat: { ACTIVE_WALLETS: number }[],
     wallets_pct_stat: { PCT_WALLETS: number }[],
     tvl_stat: { TVL_GRANTEES: number }[],
-    tvl_pct_stat: { PCT_TVL: number }[],
+    // tvl_pct_stat: { PCT_TVL: number }[],
     gas_stat: { GAS_SPEND: number }[],
     gas_pct_stat: { PCT_GAS_SPEND: number }[],
     tvl_chart: any[],
