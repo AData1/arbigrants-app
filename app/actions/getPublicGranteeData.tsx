@@ -28,7 +28,7 @@ interface GranteeDataParams {
 
 export async function getPublicGranteeData({ grantee_name }: GranteeDataParams): Promise<GranteeData> {
     noStore();
-    const response = await fetch(`https://arbigrants-api.onrender.com/grantee-public?grantee_name=${grantee_name}`);
+    const response = await fetch(`https://arbigrants-api-i7bq.onrender.com/grantee-public?grantee_name=${grantee_name}`);
     if (!response.ok) {
         throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
     }
