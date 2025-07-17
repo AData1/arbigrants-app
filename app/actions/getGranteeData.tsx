@@ -37,7 +37,7 @@ interface GranteeDataParams {
 
 export async function getGranteeData({ timeframe, grantee_name }: GranteeDataParams): Promise<GranteeData> {
     noStore();
-    const response = await fetch(`https://arbigrants-api.onrender.com/grantee?timeframe=${timeframe}&grantee_name=${grantee_name}`);
+    const response = await fetch(`https://arbigrants-api-i7bq.onrender.com/grantee?timeframe=${timeframe}&grantee_name=${grantee_name}`);
     if (!response.ok) {
         throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
     }
