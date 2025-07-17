@@ -31,7 +31,7 @@ interface OverviewData {
 export async function getOverviewData({ timeframe, timescale, chain, excludes = [] }: OverviewDataParams): Promise<OverviewData> {
     noStore();
 
-    let url = `https://arbigrants-api.onrender.com/overview?timeframe=${timeframe}&timescale=${timescale}&chain=${chain}`;
+    let url = `https://arbigrants-api-i7bq.onrender.com/overview?timeframe=${timeframe}&timescale=${timescale}&chain=${chain}`;
 
     if (excludes.length > 0) {
         const excludesParam = excludes.map(e => `excludes=${encodeURIComponent(e)}`).join('&');
